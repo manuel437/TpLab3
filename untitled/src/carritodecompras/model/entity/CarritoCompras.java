@@ -3,10 +3,7 @@ package carritodecompras.model.entity;
 import categoria.model.entity.Categoria;
 import producto.model.entity.Producto;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class CarritoCompras {
     private List<Producto> lista;
@@ -50,7 +47,6 @@ public class CarritoCompras {
 
     public boolean removerProducto(Producto producto){
         boolean ans = this.getLista().remove(producto);
-        this.actualizarCarrito();
         return ans;
     }
 
@@ -74,34 +70,33 @@ public class CarritoCompras {
     }
 
     public String mostrarContenido(){
-        String ans = "No hay productos en el carrito.\n";
-        if (this.getLista().isEmpty()) return ans;
-        ans = "";
-        List<Producto> list = new ArrayList<>(this.lista);
+        StringBuilder ans = new StringBuilder("No hay productos en el carrito.");
+        if (this.getLista().isEmpty()) return ans.toString();
+        ans = new StringBuilder();
         for (Categoria categoria : this.getCategorias()){
-            ans+=categoria.getNombre()+", id "+categoria.getId()+"\n";
-            for (Producto p:list){
+            ans.append(categoria.getNombre()).append(" (ID: ").append(categoria.getId()).append(")\n");
+            for (Producto p:this.getLista()){
                 if (p.getCategoria().getNombre().equals(categoria.getNombre())){
-                    ans+=p.getNombre()+", id "+p.getId()+".\n";
+                    ans.append(p.getNombre()).append(", id ").append(p.getId()).append(".\n");
                 }
             }
-            System.out.println();
         }
-        return ans;
+        return ans.toString();
     }
 
     public void actualizarCarrito(){
-        int counter;
-        for (Categoria categoria:this.getCategorias()){
-            counter=0;
-            for (Producto producto:this.getLista()){
-                if (producto.getCategoria().getNombre().equals(categoria.getNombre())){
+        List<Categoria> eliminar = new ArrayList<>(this.getCategorias());
+        int counter  = 0;
+        for (Categoria c : this.getCategorias()){
+            counter = 0;
+            for (Producto p: this.getLista()){
+                if (p.getCategoria().getNombre().equals(c.getNombre()))
                     counter++;
-                }
-                if (counter==0){
-                    this.getCategorias().remove(categoria);
-                }
             }
+            if (counter > 0) eliminar.add(c);
+        }
+        for (Categoria c:eliminar){
+            this.getCategorias().remove(c);
         }
     }
 }

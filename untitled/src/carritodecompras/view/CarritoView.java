@@ -14,10 +14,10 @@ public class CarritoView {
         System.out.println("Se solicita ingreso del identificador del carrito: ");
         return scanner.nextLine();
     }
-    public void carritoNoEncontrado(String id){
+    public void mensajeCarritoNoEncontrado(String id){
         System.out.println("No se ha encontrado carrito de id: " + id+".");
     }
-    public boolean helper(){
+    public boolean eleccion(){
         System.out.println("Agregar/Remover producto del carrito: ");
         String s;
         do {
@@ -30,19 +30,19 @@ public class CarritoView {
         return s.charAt(0)=='1';
     }
 
-    public void avisoCreacionProducto(){
+    public void mensajeCreacionProducto(){
         System.out.println("Creando producto:");
     }
 
-    public void avisoEliminacionProducto(){
+    public void mensajeEliminacionProducto(){
         System.out.println("Eliminación de producto.");
     }
 
-    public void avisoProductoEliminado(Producto producto){
+    public void mensajeProductoEliminado(Producto producto){
         System.out.println("Producto:  "+producto.getNombre()+" eliminado correctamente...");
     }
 
-    public void avisoNoExisteProducto(String id ){
+    public void mensajeNoExisteProducto(String id ){
         System.out.println("No existe producto de id " + id+".");
     }
 

@@ -71,37 +71,41 @@ public class CarritoController {
     /*Se actualiza la información del carrito. Sea:
     * Agregar o remover un producto del mismo.*/
     public void updateCarritoCompras(){
+        //seleción del carrito.
         String id = this.getCarritoView().generarIdCarrito();
         CarritoCompras carritoCompras = (CarritoCompras) this.carritoRepository.leer(id);
+
+        //si existe el carrito
         if (carritoCompras != null){
             carritoView.mostrarContenidoCarrito(carritoCompras);
             Producto producto;
             String nombreCat;
             Categoria categoria;
-            boolean eleccion =this.carritoView.helper();
+            //eleccion: agregar/remover
+            boolean eleccion =this.carritoView.eleccion();
             if (eleccion){
                 //Agregar producto
-                /*
-                * Revisar que la categoría no exista para no crear una igual.*/
-                this.carritoView.avisoCreacionProducto();
-                nombreCat=this.categoriaController.getCategoriaView().generarNombreCat();
-                categoria = (Categoria) this.categoriaController.getCategoriaRepository().leer(nombreCat);
-                if (categoria==null) //cat. no existe, se crea una nueva.
-                    categoria = categoriaController.getCategoriaView().generarCategoria(nombreCat);
+                this.carritoView.mensajeCreacionProducto();
+                nombreCat=this.categoriaController.getCategoriaView().generarNombreCat().toUpperCase();
+
+                categoria = categoriaController.generarCategoria(nombreCat);
+
                 producto = productoController.getProductoView().generarProducto(categoria);
                 carritoCompras.agregarProducto(producto);
             }
             else {
                 //Remover producto
-                carritoView.avisoEliminacionProducto();
+                carritoView.mensajeEliminacionProducto();
                 id = productoController.getProductoView().generarIdProducto();
                 producto = carritoCompras.leerProducto(id);
                 if (producto!=null){ //encuentra carro
                     carritoCompras.removerProducto(producto);
-                    carritoView.avisoProductoEliminado(producto);
+                    carritoCompras.actualizarCarrito();
+                    carritoView.mensajeProductoEliminado(producto);
                 }
-                else carritoView.avisoNoExisteProducto(id); //no encuentra carro
+                else carritoView.mensajeNoExisteProducto(id); //no encuentra carro
             }
-        }else this.carritoView.carritoNoEncontrado(id);
+            //No existe el carrito.
+        }else this.carritoView.mensajeCarritoNoEncontrado(id);
     }
 }
