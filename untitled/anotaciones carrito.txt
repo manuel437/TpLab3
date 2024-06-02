@@ -1,0 +1,12 @@
+Creación y agregación de un producto a un carro:
+	Se generan categorías con el mismo nombre(diferente ID) innecesariamente lo que produce mucha
+confusión y un nivel bajo de legibilidad.
+		Procurar no crear más de una categoría con el mismo nombre ( revisar).
+	Se solicita el nombre de una categoría dos veces. ( revisar )
+
+Luego de agregar un producto P de categoría X, después de haber eliminado un producto P de cat. X:
+	Al seleccionar un carro C, se listan repetidamente el producto P y cat X con diferente ID.
+			( solucionar )
+Agregar producto:
+	Al agregar dos productos distintos pertenecientes a la misma cat. Se agrega otra cat.
+
