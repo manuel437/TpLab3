@@ -33,4 +33,6 @@ public class CategoriaController {
         this.getCategoriaRepository().agregar(buscar);
         return buscar;
     }
+
+
 }

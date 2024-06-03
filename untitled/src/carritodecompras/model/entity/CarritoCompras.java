@@ -36,7 +36,13 @@ public class CarritoCompras {
                 return;
         }
         this.lista.add(producto);
-        this.categorias.add(producto.getCategoria());
+    }
+
+    public void agregarCategoria(Categoria categoria){
+        for (Categoria categoria1:this.getCategorias()){
+            if (categoria1.getNombre().equals(categoria.getNombre()))return;
+        }
+        this.getCategorias().add(categoria);
     }
 
     public Producto leerProducto(String id){
@@ -46,8 +52,7 @@ public class CarritoCompras {
     }
 
     public boolean removerProducto(Producto producto){
-        boolean ans = this.getLista().remove(producto);
-        return ans;
+        return this.getLista().remove(producto);
     }
 
     public String listarCategorias(){
@@ -93,7 +98,7 @@ public class CarritoCompras {
                 if (p.getCategoria().getNombre().equals(c.getNombre()))
                     counter++;
             }
-            if (counter > 0) eliminar.add(c);
+            if (counter == 0) eliminar.add(c);
         }
         for (Categoria c:eliminar){
             this.getCategorias().remove(c);

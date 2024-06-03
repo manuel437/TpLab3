@@ -16,13 +16,20 @@ public class ProductoView {
         ans.setCategoria(categoria);
         return ans;
     }
+    public Producto generarProducto(String nombre){
+        Producto ans = new Producto();
+        ans.setNombre(nombre);
+        return ans;
+    }
 
     public void mostrarProductos(String productos){
         System.out.println(productos);
     }
 
-    public String generarIdProducto(){
+    public String generarNombreProducto(){
         System.out.println("Ingresar id del producto:");
         return scanner.nextLine();
     }
+
+
 }

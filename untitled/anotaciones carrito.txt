@@ -1,12 +1,26 @@
-Creación y agregación de un producto a un carro:
-	Se generan categorías con el mismo nombre(diferente ID) innecesariamente lo que produce mucha
-confusión y un nivel bajo de legibilidad.
-		Procurar no crear más de una categoría con el mismo nombre ( revisar).
-	Se solicita el nombre de una categoría dos veces. ( revisar )
-
-Luego de agregar un producto P de categoría X, después de haber eliminado un producto P de cat. X:
-	Al seleccionar un carro C, se listan repetidamente el producto P y cat X con diferente ID.
-			( solucionar )
-Agregar producto:
-	Al agregar dos productos distintos pertenecientes a la misma cat. Se agrega otra cat.
-
+Muestra del contenido de un carrito:
+	( pendiente ) no se vé el contenido. 
+		1)Creo producto p1 y p2. Elimino producto p1 y no se muestra ninguno luego.
+		2)Luego de eliminar un producto, no se puede ver el contenido de un carro por más que
+posea más de un 1 solo producto. Recién se puede volver a ver cuando se agregue OTRO producto más.
+		3)Agregué de nuevo un producto que había borrado, y ahora no se puede ver, como debería 
+de suceder según el enunciado anterior a éste (el número '2').
+		4)Luego de eliminar un producto P de categoría C, no se volverá a mostrar como contenido
+ningún producto Px de categoría C. Esto no quiere decir que el producto no se haya agregado a la
+lista. Significa que simplemente no se puede visualizar... Sin embargo, al agregar un producto cuya
+categoría no haya existido antes en el producto pueden dar por seguro que sí se va a visualizar, 
+hasta que se elimine, punto a partir del cual, sin importar el producto que se agregue, si su catego-
+ría coincide con la del eliminado, no se va a poder observar dentro de la colección.
+		5) Resumen: si se borra un producto P con categoría C, a partir de entonces, no se 
+podrá visualizar ningún producto Px que tenga categoría C.
+		6) Info adicional: Después de crear producto P y P1, ambos con categoría C, 
+eliminar uno e ambos, y que no se pueda visualizar el contenido del carro correctamente, es decir,
+que no sea posible observar cuál es el producto que aún se encuentra en el, si vamos a la función
+de listar carros, se puede apreciar cómo el CARRO en cuestión todavía tiene productos, en este caso
+1 luego de haber removido 1 de los dos productos, y a pesar de ello, cuando se muestra las catego-
+rías presentes dentro del conjunto de sus productos, figura como que no hay productos (cuando en 
+verdad sí que hay), lo que nos indica que en realidad la colección que alberga las categorías está
+vacía razón por la cual nos muestra ese mensaje la consola... por lo tanto, al eliminar un producto
+de una categoría C, lo que termina sucediendo es que se vacía totalmente la colección de categorías,
+sin discriminar qué o cuál producto se ha removido... Por lo tanto tenemos productos pero no categorí-
+as.
